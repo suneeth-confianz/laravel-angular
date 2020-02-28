@@ -11,6 +11,7 @@ import { RequestResetComponent } from './components/password/request-reset/reque
 import { ResponseResetComponent } from './components/password/response-reset/response-reset.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BackendConnectorService } from './Services/backend-connector.service';
+import { TokenService } from './Services/token.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { BackendConnectorService } from './Services/backend-connector.service';
     FormsModule,
     HttpClientModule
   ],
-  providers: [BackendConnectorService],
+  providers: [BackendConnectorService, TokenService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

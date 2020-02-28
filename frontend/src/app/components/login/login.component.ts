@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BackendConnectorService } from 'src/app/Services/backend-connector.service';
+import { TokenService } from 'src/app/Services/token.service';
 
 @Component({
   selector: 'app-login',
@@ -15,13 +16,20 @@ export class LoginComponent implements OnInit {
 
   public error = null;
 
-  constructor(private BackendConnector:BackendConnectorService) { }
+  constructor(
+    private BackendConnector:BackendConnectorService, 
+    private Token:TokenService
+  ) { }
   
   onSubmit() {
     this.BackendConnector.login(this.form).subscribe(
-      data => console.log(data),
+      data => this.handleResponse(data),
       error => this.handlError(error)
     )
+  }
+
+  handleResponse(data){
+    this.Token.handle(data.access_token);
   }
 
   handlError(error) {
