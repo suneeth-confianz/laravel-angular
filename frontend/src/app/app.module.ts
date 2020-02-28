@@ -13,6 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BackendConnectorService } from './services/backend-connector.service';
 import { TokenService } from './services/token.service';
 import { AuthService } from './services/auth.service';
+import { AfterLoginService } from './services/after-login.service';
+import { BeforeLoginService } from './services/before-login.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { AuthService } from './services/auth.service';
   providers: [
     BackendConnectorService, 
     TokenService,
-    AuthService
+    AuthService,
+    AfterLoginService,
+    BeforeLoginService
   ],
   bootstrap: [AppComponent]
 })
