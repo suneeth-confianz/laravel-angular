@@ -25,7 +25,7 @@
                 <div class="form-group row">
                     <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
                     <div class="col-sm-10">
-                        <input type="password" name="password" class="form-control" id="password" [(ngModel)]="form.password" required>
+                        <input type="password" placeholder="Password" name="password" class="form-control" id="password" [(ngModel)]="form.password" required>
                         <div class="alert alert-danger" [hidden]="!error.password">
                             {{error.password}}
                         </div>
@@ -35,7 +35,7 @@
                 <div class="form-group row">
                     <label for="inputPasswordConfirmation3" class="col-sm-2 col-form-label">Confirm Password</label>
                     <div class="col-sm-10">
-                      <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" [(ngModel)]="form.password_confirmation" required>
+                      <input type="password" placeholder="Confirm Password" name="password_confirmation" class="form-control" id="password_confirmation" [(ngModel)]="form.password_confirmation" required>
                     </div>
                   </div>
                 

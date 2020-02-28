@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { BackendConnectorService } from 'src/app/Services/backend-connector.service';
 
 @Component({
   selector: 'app-signup',
@@ -17,10 +17,10 @@ export class SignupComponent implements OnInit {
 
   public error = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private BackendConnector:BackendConnectorService) { }
 
   onSubmit() {
-    return this.http.post('http://127.0.0.1:8000/api/signup', this.form).subscribe(
+    this.BackendConnector.signup(this.form).subscribe(
       data => console.log(data),
       error => this.handlError(error)
     )
