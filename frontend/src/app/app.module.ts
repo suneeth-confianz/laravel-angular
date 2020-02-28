@@ -10,8 +10,9 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { RequestResetComponent } from './components/password/request-reset/request-reset.component';
 import { ResponseResetComponent } from './components/password/response-reset/response-reset.component';
 import { HttpClientModule } from '@angular/common/http';
-import { BackendConnectorService } from './Services/backend-connector.service';
-import { TokenService } from './Services/token.service';
+import { BackendConnectorService } from './services/backend-connector.service';
+import { TokenService } from './services/token.service';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,11 @@ import { TokenService } from './Services/token.service';
     FormsModule,
     HttpClientModule
   ],
-  providers: [BackendConnectorService, TokenService],
+  providers: [
+    BackendConnectorService, 
+    TokenService,
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
