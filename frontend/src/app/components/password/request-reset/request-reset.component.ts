@@ -8,36 +8,32 @@ import { SnotifyService } from 'ng-snotify';
   styleUrls: ['./request-reset.component.css']
 })
 export class RequestResetComponent implements OnInit {
-
   public form = {
     email: null
-  }
+  };
 
-  public error = null;
 
   constructor(
     private BackendConnector: BackendConnectorService,
-    private notify: SnotifyService
-  ) { }
+    private notify: SnotifyService,
+    private Notfiy:SnotifyService
+  ) {   }
+
+  ngOnInit() {
+  }
 
 
   onSubmit() {
+    this.Notfiy.info('Wait...' ,{timeout:5000})
     this.BackendConnector.sendPasswordResetLink(this.form).subscribe(
       data => this.handleResponse(data),
       error => this.notify.error(error.error.error)
-    )
+    );
   }
 
-  handleResponse(data){
-    console.log(data)
-  }
-
-  handlError(error) {
-    console.log(error.error.error)
-    this.error = error.error.error;
-  }
-
-  ngOnInit() {
+  handleResponse(res) {
+    this.Notfiy.success(res.data,{timeout:0});
+    this.form.email = null;
   }
 
 }
