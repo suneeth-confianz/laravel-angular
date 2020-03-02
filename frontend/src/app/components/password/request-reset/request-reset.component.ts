@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BackendConnectorService } from '../../../services/backend-connector.service';
-import { SnotifyModule } from 'ng-snotify';
+import { SnotifyService } from 'ng-snotify';
 
 @Component({
   selector: 'app-request-reset',
@@ -17,7 +17,7 @@ export class RequestResetComponent implements OnInit {
 
   constructor(
     private BackendConnector: BackendConnectorService,
-    private notify: SnotifyModule 
+    private notify: SnotifyService
   ) { }
 
 
@@ -29,10 +29,11 @@ export class RequestResetComponent implements OnInit {
   }
 
   handleResponse(data){
-    
+    console.log(data)
   }
 
   handlError(error) {
+    console.log(error.error.error)
     this.error = error.error.error;
   }
 
