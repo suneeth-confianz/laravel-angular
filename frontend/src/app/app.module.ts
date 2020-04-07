@@ -16,6 +16,15 @@ import { AuthService } from './services/auth.service';
 import { AfterLoginService } from './services/after-login.service';
 import { BeforeLoginService } from './services/before-login.service';
 import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
+import { HomeLayoutComponent } from './layouts/home-layout/home-layout.component';
+import { LoginLayoutComponent } from './layouts/login-layout/login-layout.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { ListUserComponent } from './components/user/list-user/list-user.component';
+import { AddUserComponent } from './components/user/add-user/add-user.component';
+import { EditUserComponent } from './components/user/edit-user/edit-user.component';
+import { DataTablesModule } from 'angular-datatables';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthenticateInterceptor } from './interceptor/authenticate.interceptor';
 
 @NgModule({
   declarations: [
@@ -25,13 +34,20 @@ import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
     SignupComponent,
     ProfileComponent,
     RequestResetComponent,
-    ResponseResetComponent
+    ResponseResetComponent,
+    HomeLayoutComponent,
+    LoginLayoutComponent,
+    FooterComponent,
+    ListUserComponent,
+    AddUserComponent,
+    EditUserComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    DataTablesModule,
     SnotifyModule
   ],
   providers: [
@@ -40,6 +56,7 @@ import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
     AuthService,
     AfterLoginService,
     BeforeLoginService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthenticateInterceptor, multi: true },
     { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
     SnotifyService
   ],

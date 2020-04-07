@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BackendConnectorService } from '../../services/backend-connector.service';
 import { TokenService } from '../../services/token.service';
 import { Router } from '@angular/router';
+import { SnotifyService } from 'ng-snotify';
 
 @Component({
   selector: 'app-signup',
@@ -22,7 +23,8 @@ export class SignupComponent implements OnInit {
   constructor(
     private BackendConnector:BackendConnectorService,
     private Token:TokenService,
-    private router:Router
+    private router:Router,
+    private Notfiy: SnotifyService,
   ) { }
 
   onSubmit() {
@@ -33,8 +35,9 @@ export class SignupComponent implements OnInit {
   }
 
   handleResponse(data){
-    this.Token.handle(data.access_token);
-    this.router.navigateByUrl('/profile')
+    //this.Token.handle(data.access_token);
+    this.Notfiy.success('Successfully registered. Please Signin',{timeout:0});
+    this.router.navigateByUrl('/login');
   }
 
   handlError(error) {
@@ -42,6 +45,8 @@ export class SignupComponent implements OnInit {
   }
 
   ngOnInit() {
+    const body = document.getElementsByTagName('body')[0];
+    body.classList.add('login-page');
   }
 
 }

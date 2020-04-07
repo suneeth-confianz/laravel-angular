@@ -1,10 +1,10 @@
 {
 	"folders": [
 		{
-			"path": "backend"
+			"path": "/var/www/html/adminLTE-app"
 		},
 		{
-			"path": "frontend"
+			"path": "/var/www/html/laravel-angular"
 		}
 	],
 	"settings": {}

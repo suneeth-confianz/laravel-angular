@@ -29,7 +29,7 @@ export class TokenService {
 
   isValid() {
     const token = this.get();
-    if (token) {
+    if (token && typeof token !== 'undefined') {
       const payload = this.payload(token);
       if (payload) {
         console.log(payload);

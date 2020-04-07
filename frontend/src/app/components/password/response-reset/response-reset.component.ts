@@ -53,6 +53,8 @@ export class ResponseResetComponent implements OnInit {
     this.Notify.error(error.error.error)
   }
   ngOnInit() {
+    const body = document.getElementsByTagName('body')[0];
+    body.classList.add('login-page');
   }
 
 }

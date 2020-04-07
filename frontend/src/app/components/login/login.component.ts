@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
   handleResponse(data){
     this.Token.handle(data.access_token);
     this.Auth.changeAuthStatus(true);
-    this.router.navigateByUrl('/profile');
+    this.router.navigateByUrl('/admin/profile');
   }
 
   handlError(error) {
@@ -43,6 +43,8 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    const body = document.getElementsByTagName('body')[0];
+    body.classList.add('login-page');
   }
 
 }

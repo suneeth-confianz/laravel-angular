@@ -15,11 +15,12 @@ export class RequestResetComponent implements OnInit {
 
   constructor(
     private BackendConnector: BackendConnectorService,
-    private notify: SnotifyService,
     private Notfiy:SnotifyService
   ) {   }
 
   ngOnInit() {
+    const body = document.getElementsByTagName('body')[0];
+    body.classList.add('login-page');
   }
 
 
@@ -27,7 +28,7 @@ export class RequestResetComponent implements OnInit {
     this.Notfiy.info('Wait...' ,{timeout:5000})
     this.BackendConnector.sendPasswordResetLink(this.form).subscribe(
       data => this.handleResponse(data),
-      error => this.notify.error(error.error.error)
+      error => this.Notfiy.error(error.error.error)
     );
   }
 

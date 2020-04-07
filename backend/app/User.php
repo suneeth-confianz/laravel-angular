@@ -56,6 +56,11 @@ class User extends Authenticatable implements JWTSubject
         $this->attributes['password'] = bcrypt($value);
     }
 
+    public function detail()
+    {
+        return $this->hasOne('App\Model\UserDetail');
+    }
+
     /**
      * The attributes that should be cast to native types.
      *

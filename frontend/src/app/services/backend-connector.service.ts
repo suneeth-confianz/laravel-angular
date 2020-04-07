@@ -26,5 +26,10 @@ export class BackendConnectorService {
     return this.http.post(`${this.baseUrl}/resetPassword`, data)
   }
 
+  //User Component Services
+  addUser(data){
+    return this.http.post(`${this.baseUrl}/users`, data);
+  }
+
   
 }

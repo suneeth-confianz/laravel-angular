@@ -1,3 +1,4 @@
+/frontend/node_modules
 /backend/node_modules
 /backend/public/hot
 /backend/public/storage
@@ -21,7 +22,7 @@
 /frontend/bazel-out
 
 # dependencies
-/frontend/node_modules
+/frontend/node_modules/*
 
 # profiling files
 /frontend/chrome-profiler-events.json

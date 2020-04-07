@@ -1,0 +1,118 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <h1>Add new Member</h1>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+  
+    <!-- Main content -->
+    <section class="content">
+      <form #addUserForm=ngForm (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card card-success">
+              <div class="card-header">
+                <h3 class="card-title">General</h3>
+  
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i></button>
+                </div>
+              </div>
+              <div class="card-body">
+                
+                  <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" class="form-control" [(ngModel)]="form.name" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="address">Address</label>
+                    <textarea name="address" id="address" class="form-control" rows="4" [(ngModel)]="form.address" required></textarea>
+                  </div>
+                  <div class="row">
+                    <div class="form-group col-6">
+                      <label for="city">City</label>
+                      <input type="text" name="city" id="city" class="form-control" [(ngModel)]="form.city" required>
+                    </div>
+                    <div class="form-group col-6">
+                      <label for="pin">PIN Code</label>
+                      <input type="number" name="pin" id="pin" class="form-control" [(ngModel)]="form.pin" required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="status">Status</label>
+                    <select name="status" id="status" class="form-control custom-select" [(ngModel)]="form.status" required>
+                      <option selected>Active</option>
+                      <option>Disabled</option>
+                    </select>
+                  </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <div class="col-md-6">
+            <div class="col-md-12">
+              <div class="card card-warning">
+                <div class="card-header">
+                  <h3 class="card-title">Credentials</h3>
+    
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                      <i class="fas fa-minus"></i></button>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="email">Email (Username)</label>
+                    <input type="text" name="email" id="email" class="form-control" [(ngModel)]="form.email" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" class="form-control" [(ngModel)]="form.password" required>
+                  </div>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+            <div class="col-md-12">
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Contacts</h3>
+    
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                      <i class="fas fa-minus"></i></button>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="phone">Phone number</label>
+                    <input type="text" name="phone" id="phone" class="form-control" [(ngModel)]="form.phone" required>
+                  </div>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+
+          </div>
+          
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <a routerLink="/admin/members" class="btn btn-secondary">Cancel</a>&nbsp;&nbsp;
+            <button type="submit" class="btn btn-success" [disabled]="!addUserForm.valid">Create new Member</button>
+          </div>
+        </div>
+        <br/>
+      </form>
+    </section>
+    <!-- /.content -->
+  </div>
