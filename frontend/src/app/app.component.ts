@@ -14,6 +14,5 @@ export class AppComponent {
     if (authService.isLoggedIn()) {      
       //router.navigate(['profile']);
     }
-    console.log(authService.isLoggedIn());
   }
 }

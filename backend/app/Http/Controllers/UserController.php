@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Model\UserDetail;
 
+use App\Http\Resources\User as UserResource;
+use App\Http\Resources\UserCollection;
+
 class UserController extends Controller
 {
 
@@ -26,7 +29,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return new UserCollection(User::has('detail')->get());
     }
 
     /**
@@ -52,6 +55,7 @@ class UserController extends Controller
         $user->name = $request->name;      
         $user->email = $request->email;
         $user->password = $request->password;
+        $user->status = $request->status;
         $user->save();
  
         $detail = new UserDetail;
@@ -59,11 +63,10 @@ class UserController extends Controller
         $detail->pin = $request->pin;
         $detail->city = $request->city;
         $detail->address = $request->address;
-        $detail->status = $request->status;
         
         $user->detail()->save($detail);
 
-        return response()->json(['message' => 'Successfully created the new member']);
+        return (new UserResource($user))->response()->setStatusCode(200);
     }
 
     /**
@@ -74,7 +77,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        return (new UserResource(User::with('detail')->find($id)))->response()->setStatusCode(200);
     }
 
     /**
@@ -97,7 +100,17 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        $user->name = $request->name;      
+        //$user->email = $request->email;
+        $user->status = $request->status;
+        $user->detail->phone = $request->phone;
+        $user->detail->pin = $request->pin;
+        $user->detail->city = $request->city;
+        $user->detail->address = $request->address;
+        $user->push();
+
+        return (new UserResource($user))->response()->setStatusCode(200);
     }
 
     /**
@@ -108,6 +121,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::destroy($id);
     }
 }

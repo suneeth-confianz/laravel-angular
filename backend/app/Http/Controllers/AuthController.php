@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SignUpRequest;
 
 use App\User;
+use App\Model\UserDetail;
 
 class AuthController extends Controller
 {
@@ -17,7 +18,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login','signup']]);
+        $this->middleware('auth:api', ['except' => ['login','signup','refresh']]);
     }
 
     /**
@@ -39,6 +40,9 @@ class AuthController extends Controller
     public function signup(SignUpRequest $request)
     {
         $user = User::create($request->all());
+        $detail = new UserDetail;
+        $user->detail()->save($detail);
+
         return $this->login($request);
 
     }

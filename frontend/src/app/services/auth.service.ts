@@ -7,11 +7,12 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 })
 export class AuthService {
   isLoggedIn() {
-    console.log(this.authStatus);
     return this.authStatus;
   }
 
   private loggedIn = new BehaviorSubject <boolean>(this.Token.loggedIn());
+ 
+  
   authStatus = this.loggedIn.asObservable();
 
   changeAuthStatus(value: boolean) {

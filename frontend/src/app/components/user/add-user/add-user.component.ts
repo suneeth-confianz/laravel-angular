@@ -16,7 +16,7 @@ export class AddUserComponent implements OnInit {
     address: null,
     city: null,
     pin: null,
-    status: null,
+    status: 'active',
     phone: null,
     email: null,
     password: null

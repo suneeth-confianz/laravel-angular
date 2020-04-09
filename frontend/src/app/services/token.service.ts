@@ -32,7 +32,6 @@ export class TokenService {
     if (token && typeof token !== 'undefined') {
       const payload = this.payload(token);
       if (payload) {
-        console.log(payload);
         return Object.values(this.iss).indexOf(payload.iss) > -1 ? true : false;
       }
     }

@@ -16,11 +16,10 @@ class CreateUserDetailTable extends Migration
         Schema::create('user_detail', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned()->index();
-            $table->text('address');
-            $table->string('city', 100);
-            $table->string('pin', 10);
-            $table->string('phone', 20);
-            $table->enum('status', ['active', 'disabled']);
+            $table->text('address')->nullable();
+            $table->string('city', 100)->nullable();
+            $table->string('pin', 10)->nullable();
+            $table->string('phone', 20)->nullable();
             $table->timestamps();
         });
 
