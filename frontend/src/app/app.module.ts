@@ -26,6 +26,11 @@ import { DataTablesModule } from 'angular-datatables';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthenticateInterceptor } from './interceptor/authenticate.interceptor';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+import { AddIncomeComponent } from './components/income/add-income/add-income.component';
+import { ListIncomeComponent } from './components/income/list-income/list-income.component';
+import { EditIncomeComponent } from './components/income/edit-income/edit-income.component';
+import { MonthDatePickerComponent } from './components/month-date-picker/month-date-picker.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -42,6 +47,10 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
     ListUserComponent,
     AddUserComponent,
     EditUserComponent,
+    AddIncomeComponent,
+    ListIncomeComponent,
+    EditIncomeComponent,
+    MonthDatePickerComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,7 +62,8 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
     SnotifyModule,
     ConfirmationPopoverModule.forRoot({
       confirmButtonType: 'danger'
-    })
+    }),
+    NgbModule
   ],
   providers: [
     BackendConnectorService, 

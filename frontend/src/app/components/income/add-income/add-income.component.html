@@ -1,0 +1,240 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <h1>Add Income</h1>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+  
+    <!-- Main content -->
+    <section class="content">
+      <form #addIncomeForm=ngForm [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card card-success">
+              <div class="card-header">
+                <h3 class="card-title">Reciept</h3>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="recieptNumber">Reciept Number</label>
+                            <input formControlName="recieptNumber"  type="text" id="recieptNumber" name="recieptNumber" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="recieptAmount">Reciept Amount</label>
+                            <input formControlName="recieptAmount"  type="number" id="recieptAmount" name="recieptAmount" class="form-control">
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+            <div class="card card-warning" formArrayName="incomes"  *ngFor="let income of incomeFormGroup.controls; let i = index;">
+                <div class="card-header">
+                  <h3 class="card-title">Income</h3>
+    
+                  <div class="card-tools" *ngIf="i">
+                    <button type="button" class="btn btn-info float-right"  (click)="this.removeIncome(i)">
+                      <i class="fas fa-minus"> </i> Remove Income</button>
+                  </div>
+                </div>
+                <div class="card-body">
+                    <div [formGroupName]="i" class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="status">Income Category</label>
+                                <select (change)="showFieldsBasedOnCategory($event,i)"   formControlName="incomeCategory" class="form-control custom-select">
+                                    <option value="monthly_fee">Monthly fee</option>
+                                    <option value='auction'>Auction</option>
+                                    <option value='rent'>Rent</option>
+                                    <option value='donation'>Donation</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="name">amount</label>
+                                <input type="text" formControlName="amount" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-6 check-for-member check-for-member-{{i}}">
+                            <div class="form-group">
+                                <label for="status">Is member? &nbsp;&nbsp;</label>
+                                <input id="isMember" type="radio" (click)="showMember($event,i)" value="yes" formControlName="isMember">
+                                <span for="male"> Yes</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input id="isMember" type="radio" (click)="showMember($event,i)"  value="no" formControlName="isMember">
+                                <span for="isMember"> No</span>
+                            </div> 
+                        </div>
+                        <div class="row col-md-12 ">
+                          <div class="member member-{{i}} col-md-6">                            
+                              <div class="form-group">
+                                  <label for="status">Member</label>
+                                  <select formControlName="member" class="form-control custom-select">
+                                    <option value="1">Suneeth</option>
+                                  </select>
+                              </div>
+                          </div>
+                        </div>
+                        <div class="col-md-12 ">
+                          <div class="not-member not-member-{{i}}">
+                            <div class="row">
+                              <div class="form-group col-md-6">
+                                  <label for="status">Guest Name</label>
+                                  <input formControlName="guest"  type="text" class="form-control">
+                              </div> 
+                              <div class="form-group col-md-6">
+                                <label for="status">Guest Address</label>
+                                <input formControlName="guestAddress"  type="text" class="form-control">
+                              </div> 
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-12 ">
+                          <div class="member-monthly-fee member-monthly-fee-{{i}}">
+                            <div class="row">
+                              <div class="form-group col-md-6">
+                                  <label for="status">Monthly fee (From)</label>
+                                  <month-date-picker  name="memberMonthlyFeeFrom" formControlName="memberMonthlyFeeFrom"></month-date-picker>
+                                  
+                              </div> 
+                              <div class="form-group col-md-6">
+                                <label for="status">Monthly fee (To)</label>
+                                <month-date-picker name="memberMonthlyFeeTo" formControlName="memberMonthlyFeeTo"></month-date-picker>
+                                
+                            </div> 
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-12 ">
+                          <div class="auction-fields auction-fields-{{i}}">
+                            <div class="row">
+                              <div class="form-group col-md-2">
+                                  <label for="status">Auction Date</label>
+                                  <div class="input-group">
+                                    <input formControlName="auctionDate" class="form-control" placeholder="yyyy-mm-dd" name="auctionDate"   ngbDatepicker #auctionDate="ngbDatepicker">
+                                    <div class="input-group-append">
+                                      <button class="btn btn-outline-secondary dropdown-toggle-split" (click)="auctionDate.toggle()" type="button">
+                                        <div class="calendar" aria-hidden="true"></div>
+                                      </button>
+                                    </div>
+                                  </div>
+                              </div> 
+                              <div class="form-group col-md-3">
+                                  <label for="status">Auction Item</label>
+                                  <textarea formControlName="auctionItem"  type="text" class="form-control"></textarea>
+                              </div>
+                              <div class="form-group col-md-3">
+                                <label for="status">Auction Amount</label>
+                                <input formControlName="auctionAmount"  type="text" class="form-control">
+                              </div> 
+                              <div class="form-group col-md-2">
+                                <label for="status">Auction Pay Date</label>
+                                <div class="input-group">
+                                  <input formControlName="auctionPayDate" class="form-control" placeholder="yyyy-mm-dd" name="auctionPayDate"  ngbDatepicker #auctionPayDate="ngbDatepicker">
+                                  <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary dropdown-toggle-split" (click)="auctionPayDate.toggle()" type="button">
+                                      <div class="calendar" aria-hidden="true"></div>
+                                    </button>
+                                  </div>
+                                </div>
+                              </div> 
+                              <div class="form-group col-md-2">
+                                <label for="status">Auction Fine</label>
+                                <input formControlName="auctionFine"  type="text" class="form-control">
+                              </div> 
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-12 ">
+                          <div class="rent-fields rent-fields-{{i}}">
+                            <div class="row">
+                              <div class="form-group col-md-3">
+                                  <label for="status">Rent Date</label>
+                                  <div class="input-group">
+                                    <input formControlName="rentDate" class="form-control" placeholder="yyyy-mm-dd" name="rentDate"  ngbDatepicker #rentDate="ngbDatepicker">
+                                    <div class="input-group-append">
+                                      <button class="btn btn-outline-secondary dropdown-toggle-split" (click)="rentDate.toggle()" type="button">
+                                        <div class="calendar" aria-hidden="true"></div>
+                                      </button>
+                                    </div>
+                                  </div>
+                              </div> 
+                              <div class="form-group col-md-3">
+                                  <label for="status">Rent Item(s)</label>
+                                  <textarea formControlName="rentItem"  type="text" class="form-control"></textarea>
+                              </div>
+                              <div class="form-group col-md-3">
+                                <label for="status">Rent Amount</label>
+                                <input formControlName="rentAmount"  type="text" class="form-control">
+                              </div> 
+                              <div class="form-group col-md-3">
+                                <label for="status">Rent Pay Date</label>
+                                <div class="input-group">
+                                  <input formControlName="rentPayDate" class="form-control" placeholder="yyyy-mm-dd" name="rentPayDate"  ngbDatepicker #rentPayDate="ngbDatepicker">
+                                  <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary dropdown-toggle-split" (click)="rentPayDate.toggle()" type="button">
+                                      <div class="calendar" aria-hidden="true"></div>
+                                    </button>
+                                  </div>
+                                </div>
+                              </div> 
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-12 ">
+                          <div class="donation-fields donation-fields-{{i}}">
+                            <div class="row">
+                              <div class="form-group col-md-4">
+                                  <label for="status">Donation Date</label>
+                                  <div class="input-group">
+                                    <input formControlName="donationDate" class="form-control" placeholder="yyyy-mm-dd" name="donationDate"  ngbDatepicker #donationDate="ngbDatepicker">
+                                    <div class="input-group-append">
+                                      <button class="btn btn-outline-secondary dropdown-toggle-split" (click)="donationDate.toggle()" type="button">
+                                        <div class="calendar" aria-hidden="true"></div>
+                                      </button>
+                                    </div>
+                                  </div>
+                              </div> 
+                              <div class="form-group col-md-4">
+                                <label for="status">Donation Amount</label>
+                                <input formControlName="donationAmount"  type="text" class="form-control">
+                              </div> 
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+              <div class="row">
+                <div class="col-12">
+                    <button type="button" class="btn btn-success float-right"  (click)="this.addIncome()">Add Income</button>
+                </div>
+              </div> 
+          </div>
+          
+          
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <a routerLink="/admin/members" class="btn btn-secondary">Cancel</a>&nbsp;&nbsp;
+            <button type="submit" class="btn btn-success" [disabled]="!addIncomeForm.valid">Create new Member</button>
+          </div>
+        </div>
+        <br/>
+      </form>
+    </section>
+    <!-- /.content -->
+  </div>

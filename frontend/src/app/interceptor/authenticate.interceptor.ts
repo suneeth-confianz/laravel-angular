@@ -35,8 +35,8 @@ export class AuthenticateInterceptor implements HttpInterceptor {
             location.reload(true);
         }
 
-        const error = err.error.message || err.statusText;
-        return throwError(error);
+        //const error = err.error.message || err.statusText;
+        return throwError(err);
     }));
     
   }

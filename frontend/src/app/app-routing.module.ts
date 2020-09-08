@@ -12,6 +12,9 @@ import { BeforeLoginService } from './services/before-login.service';
 import { ListUserComponent } from './components/user/list-user/list-user.component';
 import { AddUserComponent } from './components/user/add-user/add-user.component';
 import { EditUserComponent } from './components/user/edit-user/edit-user.component';
+import { ListIncomeComponent } from './components/income/list-income/list-income.component';
+import { AddIncomeComponent } from './components/income/add-income/add-income.component';
+import { EditIncomeComponent } from './components/income/edit-income/edit-income.component';
 
 const appRoutes: Routes = [
 
@@ -38,6 +41,21 @@ const appRoutes: Routes = [
       {
         path:'member/edit',
         component: EditUserComponent,
+        canActivate: [AfterLoginService]
+      },
+      {
+        path:'income',
+        component: ListIncomeComponent,
+        canActivate: [AfterLoginService]
+      },
+      {
+        path:'income/add',
+        component: AddIncomeComponent,
+        canActivate: [AfterLoginService]
+      },
+      {
+        path:'income/edit',
+        component: EditIncomeComponent,
         canActivate: [AfterLoginService]
       }
     ]
